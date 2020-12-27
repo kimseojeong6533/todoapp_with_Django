@@ -10,16 +10,65 @@
     <strong>마감이 가까운 일정!</strong>{{close_end_day}}
 </div>
 
-
-<div class="col-md-12">
+<div class="col-md-4">
     <div class="container">
-        {% for list in todo_list %}
-<!--            {{list.title}} <br>-->
-
-            <div class="list-group-item"><input type="checkbox" name={{list.title}} value={{list.title}}>{{list.title}}</div>
-        {% endfor %}
+        <h3>기한있는 일정</h3>
+        <div id="todo_list_endDate" class="list-group-col">
+            {% for list in todo_list_endDate_non_complete %}
+            <div class="list-group-item" div_pk={{list.no}} priority={{list.priority}}><input type="checkbox" pk={{list.no}} name="end_non_complete" value={{list.title}}><a href="{% url 'todo_board:todo_board_detail' pk=list.no %}">{{list.title}}</a><p>{{list.end_date}}</p></div>
+            {% endfor %}
+        </div>
     </div>
 </div>
+
+<div class="col-md-4">
+    <div class="container">
+        <h3>기한없는 일정</h3><br>
+        <div id="todo_list_no_endDate" class="list-group-col">
+            {% with end_date="마감일 없음" %}
+                {% for list in todo_list_no_endDate %}
+                <div class="list-group-item" div_pk={{list.no}}><input type="checkbox" pk={{list.no}} name="no_endDate_non_complete" value={{list.title}}><a href="{% url 'todo_board:todo_board_detail' pk=list.no %}">{{list.title}}</a><p>{{end_date}}</p> </div>
+                {% endfor %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="container">
+        <h3>마감된 일정</h3>
+        <div class="list-group-col">
+            {% with end_date="마감일 없음" %}
+                {% for list in todo_list_endDate_complete %}
+                    {% if list.end_date == None %}
+                        <div class="list-group-item list-group-item-success" div_pk={{list.priority}}><input type="checkbox" pk={{list.no}} name="complete" value={{list.title}}><a href="{% url 'todo_board:todo_board_detail' pk=list.no %}">{{list.title}}</a><p>{{end_date}}</p> </div>
+                    {% else %}
+                        <div class="list-group-item list-group-item-success" div_pk={{list.priority}}><input type="checkbox" pk={{list.no}} name="complete" value={{list.title}}> <a href="{% url 'todo_board:todo_board_detail' pk=list.no %}">{{list.title}}</a><p>{{list.end_date}}</p></div>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12">
+
+<!--    <div class="container">-->
+    <button type="button" class="btn btn-primary" onclick="location.href='{% url 'todo_board:todo_board_insert' %}'">일정추가</button>
+    <button type="button" class="btn btn-primary" onclick="priority_save()">*우선순위 저장</button>
+    <p>*마우스 드래그로 우선순위 변경이 가능합니다</p>
+<!--        <div id="examplel" class="list-group-col">-->
+<!--            {% for list in todo_list %}-->
+<!--            <div class="list-group-item"><input type="checkbox" name={{list.title}} value={{list.title}}><a href="{% url 'todo_board:todo_board_detail' pk=list.no %}">{{list.title}}</a></div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+
+<!--    </div>-->
+
+
+</div>
+
 
 
 {% endblock main %}

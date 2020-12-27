@@ -19,6 +19,10 @@ class Todo_list(models.Model):
     priority = models.BooleanField()
     end_date = models.DateField()
 
+    def todo_save(self):
+        self.save()
+
     class Meta:
         managed = False
         db_table = 'todo_list'
+
