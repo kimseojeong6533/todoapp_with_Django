@@ -3,11 +3,22 @@
 {% block main %}
 
 <div class="alert alert-info">
-    <strong>마감이 지난 일정!</strong>{{over_end_day}}
+    <strong>마감이 지난 일정</strong>
+        <div class="container">
+            {% for list in over_end_day %}
+            {{list.title}}
+            {% endfor %}
+        </div>
 </div>
 
 <div class="alert alert-info">
-    <strong>마감이 가까운 일정!</strong>{{close_end_day}}
+    <strong>마감이 가까운 일정</strong>
+    <div class="container">
+            {% for list in close_end_day %}
+            {{list.title}}
+            {% endfor %}
+    </div>
+<!--    <div class="container">{{close_end_day}}</div>-->
 </div>
 
 <div class="col-md-4">

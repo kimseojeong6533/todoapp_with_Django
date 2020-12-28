@@ -9,7 +9,10 @@ class DateInput(forms.DateInput):
 class TodoForm(forms.ModelForm):
     class Meta:
         model = Todo_list
-        fields = ('title', 'content', 'end_date')
+        fields = ('title', 'content','end_date')
+
+
         widgets = {
-            'end_date': DateInput()
+            'end_date': DateInput(),
+            #'Deadline' : forms.CheckboxInput()
         }

@@ -35,7 +35,8 @@ class Todo_board(generic.TemplateView):
             if (end_day - today).days >= -1 and (end_day-today).days < 3:
                 close_end_day.append(i.title)
 
-
+        print(over_end_day)
+        print(close_end_day)
         # todo_list = Todo_list.objects.all()
         # return render(request, template_name, {"todo_list": todo_list})
         return render(request, template_name, {"todo_list_endDate_non_complete" : todo_list_enddate_non_complete, "todo_list_endDate_complete": todo_list_endDate_complete, "todo_list_no_endDate": todo_list_no_endDate, 'close_end_day': close_end_day, 'over_end_day':over_end_day})

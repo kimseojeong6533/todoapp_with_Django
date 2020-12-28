@@ -15,7 +15,7 @@ class Todo_list(models.Model):
     user_id = models.CharField(max_length=50)
     title = models.CharField(max_length=200)
     content = models.TextField(max_length=1000)
-    is_complete = models.BooleanField()
+    is_complete = models.BooleanField(default=False)
     priority = models.BooleanField()
     end_date = models.DateField()
 
